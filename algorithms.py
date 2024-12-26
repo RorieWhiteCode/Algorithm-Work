@@ -353,3 +353,55 @@ Python Leet-code Linked List Question's
 ===============================
 																				"""
 #=====================================================================================================================================
+#Remove Duplicates, tranversing and missing automatically deletes it
+class ListNode:
+     def __init__(self, val=0, next=None):
+       self.val = val
+       self.next = next
+
+class Solution:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head:
+            return head
+        c = head 
+        while c and c.next:
+            if c.val == c.next.val:
+                c.next = c.next.next
+            else:
+                c = c.next
+        return head
+#=============================================================================================================================
+#Add Two numbers Linked-List: I need to review this because it does not work.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        l3 = ListNode(0)
+        current = l3
+        c = 0 
+        while l1 or l2 or c:
+            a = l1.val if l1 else 0
+            b = l2.val if l2 else 0
+            total = a + b + c
+            c, digit = divmod(total, 10)
+            current.next = ListNode(digit)
+            current = current.next
+            if l1: l1 = l1.next
+            if l2: l2 = l2.next
+        return l3.next
+#=====================================================================================================================================
+																		"""
+
+===============================
+Python Leet-code String Question's
+===============================																		"""
+#=====================================================================================================================================
+#Longest Substring Without Repeating Characters
+from itertools import combinations
+s = "abcabcabb"
+res = [s[x:y] for x, y in combinations(range(len(s)+ 1), r = 2)]
+print("All sub-strings:", res)
+
+
