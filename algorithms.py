@@ -408,5 +408,26 @@ from itertools import combinations
 s = "abcabcabb"
 res = [s[x:y] for x, y in combinations(range(len(s)+ 1), r = 2)]
 print("All sub-strings:", res)
+#Note the dumb O(n^3) solution, and not reading the question properly, we're only returning unique character len ints => O(n) with sliding window
+def length_of_longest_substring(s: str) -> int:
+    char_set = set()    # Track distinct characters in the current window
+    max_len = 0
+    start = 0
+    for end in range(len(s)):
+        # If the character s[end] is already in the set,
+        # move the start pointer until that duplicate is removed
+        while s[end] in char_set:
+            char_set.remove(s[start])
+            start += 1        
+        # Add the new character and update max_len
+        char_set.add(s[end])
+        max_len = max(max_len, end - start + 1)
+    return max_len
+# Example Usage:
+s = "abcabcabb"
+result = length_of_longest_substring(s)
+print("Longest substring length with distinct characters:", result)
+
+
 
 
